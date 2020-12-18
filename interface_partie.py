@@ -103,8 +103,14 @@ class InterfacePartie(Tk):
         pass
 
     def sauvegarde(self):
+        """
+        Méthode pour sauvegarder une partie.
+        Prend les attributs dimension_rangee, dimension_colonne et nombre de tour et les écris dans un fichier text
+        Prend une liste des positions des mines, cases dévoilées et cases marquées et les écris dans le même fichier text
+        Fichier sauvegarder à l'endroit choisi par l'utilisateur.
+        """
         if self.dictionnaire_boutons == {}:
-            messagebox.message(title='Erreur', message='Aucune partie en cours')
+            messagebox.Message(title='Erreur', message='Aucune partie en cours')
 
         nombre_range = self.dimension_rangee
         nombre_colonne = self.dimension_colonne
@@ -134,6 +140,11 @@ class InterfacePartie(Tk):
 
 
     def valider_charger_partie(self):
+        """
+        Méthode pour alerter l'utilisateur que la partie en cours sera perdue si elle n'est pas enregistrée.
+        Détruit la partie en cours s'il y a lieu.
+        Envoi vers la méthode charger
+        """
         if self.dictionnaire_boutons != {}:
             msg = messagebox.askquestion(title='Attention', message="Votre partie sera effacée si elle n'est pas sauvegarder", icon="warning")
             if msg == 'yes':
@@ -143,8 +154,14 @@ class InterfacePartie(Tk):
             self.charger()
 
     def charger(self):
-
-
+        """
+        Méthode pour charger une partie enregistrer
+        En ordre, ajouter les paramètres dimension_rangee, dimension_colonne, nombre_de_tour
+        retrouver les positions en appelant la fonction chaine_a_liste du fichier chaine_a_liste.py
+        
+        Recréer un nouveau jeux en utilisant les données sauvegardées.
+        """
+        
         nom_fichier = filedialog.askopenfile(mode="r", defaultextension=".txt")
 
         self.dimension_rangee = int(nom_fichier.readline())
